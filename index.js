@@ -6,7 +6,7 @@ dotenv.config();
 const branch = "default";
 const email = process.env.EMAIL;
 const password = process.env.PASSWORD;
-console.log(password);
+
 const data = {
   branch: branch,
   modules: {},
@@ -18,14 +18,6 @@ const data = {
   */
 };
 
-// const readFileNames = (filenames) => {
-//   return Promise.all(filenames.map((f) => fsPromises.readFile(f)));
-// };
-
-// func(["./a", "./b"])
-//   .then((res) => console.log("all read", res))
-//   .catch(console.log);
-
 const readModules = async () => {
   let filenames = await fs.readdir("./modules/" + branch);
   console.log("Files: " + filenames);
@@ -35,6 +27,7 @@ const readModules = async () => {
       "./modules/" + branch + "/" + filename,
       "utf8"
     );
+
     let fileNameWithoutExtension = filename.split(".").slice(0, -1).join(".");
     data.modules[fileNameWithoutExtension] = filedata;
   }
